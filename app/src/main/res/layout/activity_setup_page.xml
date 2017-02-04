@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_setup_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.davidbqtran.quickfind.SetupPage">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,13 +18,142 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="TextView"
+                android:text="Type of food:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2" />
 
             <Button
-                android:text="Get Location"
+                android:text="Toggle All"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/BreakFastButton"
+                        android:textOff="Breakfast" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/MiddleEastButton"
+                        android:textOff="Middle East" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/PizzaButton"
+                        android:textOff="Pizza" />
+
+                    <ToggleButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/VietButton"
+                        android:textOff="Viet" />
+
+                    <ToggleButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ItalianButton"
+                        android:textOff="Italian" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ChineseButton"
+                        android:textOff="Chinese" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/CafeTeaButton"
+                        android:textOff="Cafe &amp; Tea" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ThaiButton"
+                        android:textOff="Thai" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/MediterraneanButton"
+                        android:textOff="Mediterranean" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/BurgerButton"
+                        android:textOff="Burger &amp; Sandwich" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/IndianButton"
+                        android:textOff="Indian" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/BarPubButton"
+                        android:textOff="Bar &amp; Pub" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/JapaneseButton"
+                        android:textOff="Japanese" />
+
+                    <ToggleButton
+                        android:text="ToggleButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/FastFood"
+                        android:textOff="Fast Food" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:text="Your location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView" />
+
+            <Button
+                android:text="Detect Location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/LocationButton" />
@@ -39,7 +164,7 @@
                 android:inputType="textPostalAddress"
                 android:ems="10"
                 android:id="@+id/editText"
-                android:hint="ie: H4G 3A9"
+                android:hint="or write it yourself ie: H4G 3A9"
                 android:maxLines="1" />
 
             <LinearLayout
@@ -49,10 +174,9 @@
 
                 <TextView
                     android:text="Price Range"
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
-                    android:layout_weight="1" />
+                    android:id="@+id/textView3" />
 
                 <ToggleButton
                     android:layout_width="wrap_content"
@@ -90,30 +214,17 @@
                     android:textOn="$$$$" />
             </LinearLayout>
 
-            <Switch
-                android:text="Transport Mode"
+            <Button
+                android:text="Find me something >"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/switch1"
-                android:textOn="Car"
-                android:textOff="Transit"
-                android:checked="true"
-                style="@android:style/Widget.CompoundButton.Switch"
-                android:splitTrack="false" />
+                android:id="@+id/SendButton"
+                android:elevation="0dp"
+                style="@style/Widget.AppCompat.Button"
+                android:textStyle="normal|bold"
+                android:onClick="FindClick"/>
 
         </LinearLayout>
-    </ScrollView>
-
-    <Button
-        android:text="Find me something >"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/SendButton"
-        android:elevation="0dp"
-        style="@style/Widget.AppCompat.Button"
-        android:textStyle="normal|bold"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="true" />
 
 
-</RelativeLayout>
+</ScrollView>
