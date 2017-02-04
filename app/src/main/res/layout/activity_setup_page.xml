@@ -156,14 +156,15 @@
                 android:text="Detect Location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/LocationButton" />
+                android:id="@+id/LocationButton"
+                android:onClick="GetLocationClick" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPostalAddress"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/editTextLocation"
                 android:hint="or write it yourself ie: H4G 3A9"
                 android:maxLines="1" />
 
@@ -184,7 +185,8 @@
                     android:id="@+id/toggleButton4"
                     android:layout_weight="1"
                     android:textOff="$"
-                    android:textOn="$" />
+                    android:textOn="$"
+                    android:text="$" />
 
                 <ToggleButton
                     android:text="$$"
