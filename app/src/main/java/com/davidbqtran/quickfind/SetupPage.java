@@ -56,12 +56,14 @@ public class SetupPage extends AppCompatActivity implements
 
     private ArrayList<ToggleButton> allButtons;
 
+    public static Activity myActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_page);
-
+        myActivity = this;
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -157,7 +159,7 @@ public class SetupPage extends AppCompatActivity implements
         }
     }
 
-    private void RequestYelp(){
+    private Long RequestYelp(){
         OkHttpClient client = new OkHttpClient();
 
 
@@ -209,7 +211,7 @@ public class SetupPage extends AppCompatActivity implements
         String location = "";
         EditText locationText = (EditText)findViewById(R.id.editTextLocation);
         if(!locationText.getText().toString().isEmpty()) {
-            location = "&location="+locationText.getText().toString();
+            location = "&location="+locationText.getText().toString().replace(" ", "+");
         }
         if(mLastLocation != null) {
             location = "&latitude="+String.valueOf(mLastLocation.getLatitude()) + "&longitude="+String.valueOf(mLastLocation.getLongitude());
@@ -248,7 +250,7 @@ public class SetupPage extends AppCompatActivity implements
         }
 
         // TODO: radius
-        String radius = "";//"&radius=10000";
+        String radius = "&radius=3000";
 
         String finalUrl = "https://api.yelp.com/v3/businesses/search?"+terms+"&open_now=true"+location+radius+price;
         Log.i("yelp", "GET: " + finalUrl);
@@ -268,6 +270,10 @@ public class SetupPage extends AppCompatActivity implements
             try {
 
                 JSONObject obj = new JSONObject(json);
+                int nb = obj.getInt("total");
+                if(nb == 0) {
+                    return Long.parseLong("-1");
+                }
                 JSONArray arr = obj.getJSONArray("businesses");
                 Random random = new Random();
                 JSONObject elem = arr.getJSONObject(random.nextInt(arr.length()));
@@ -279,10 +285,15 @@ public class SetupPage extends AppCompatActivity implements
 
             } catch (Throwable t) {
                 Log.i("Yelp", "Could not parse malformed JSON: \"" + json + "\"");
+                JSONObject ob = new JSONObject(json);
+                return Long.parseLong("-1");
             }
         } catch(Exception e) {
             Log.i("Yelp", "Error GET " + e.toString());
+
         }
+
+        return Long.parseLong("0");
     }
 
     @Override
@@ -338,14 +349,18 @@ public class SetupPage extends AppCompatActivity implements
     private class AuthenticatorYelp extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             AuthenticateYelp();
-            RequestYelp();
-            return Long.parseLong("0");
+            Long r = RequestYelp();
+            return r;
         }
 
         protected void onProgressUpdate(Integer... progress) {
         }
 
         protected void onPostExecute(Long result) {
+            if(result == -1) {
+                Toast.makeText(myActivity, "Unable to find food, please check the location!",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
