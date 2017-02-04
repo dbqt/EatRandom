@@ -46,47 +46,54 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/BreakFastButton"
-                        android:textOff="Breakfast" />
+                        android:textOff="Breakfast"
+                        android:textOn="Breakfast"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/MiddleEastButton"
-                        android:textOff="Middle East" />
+                        android:textOff="Middle East"
+                        android:textOn="Middle East"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/PizzaButton"
-                        android:textOff="Pizza" />
+                        android:textOff="Pizza"
+                        android:textOn="Pizza"/>
 
                     <ToggleButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/VietButton"
-                        android:textOff="Viet" />
+                        android:textOff="Viet"
+                        android:textOn="Viet"/>
 
                     <ToggleButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ItalianButton"
-                        android:textOff="Italian" />
+                        android:textOff="Italian"
+                        android:textOn="Italian"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ChineseButton"
-                        android:textOff="Chinese" />
+                        android:textOff="Chinese"
+                        android:textOn="Chinese"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/CafeTeaButton"
-                        android:textOff="Cafe &amp; Tea" />
+                        android:textOff="Cafe &amp; Tea"
+                        android:textOn="Cafe &amp; Tea"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,49 +107,56 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ThaiButton"
-                        android:textOff="Thai" />
+                        android:textOff="Thai"
+                        android:textOn="Thai"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/MediterraneanButton"
-                        android:textOff="Mediterranean" />
+                        android:textOff="Mediterranean"
+                        android:textOn="Mediterranean"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/BurgerButton"
-                        android:textOff="Burger &amp; Sandwich" />
+                        android:textOff="Burger &amp; Sandwich"
+                        android:textOn="Burger &amp; Sandwich"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/IndianButton"
-                        android:textOff="Indian" />
+                        android:textOff="Indian"
+                        android:textOn="Indian"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/BarPubButton"
-                        android:textOff="Bar &amp; Pub" />
+                        android:textOff="Bar &amp; Pub"
+                        android:textOn="Bar &amp; Pub"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/JapaneseButton"
-                        android:textOff="Japanese" />
+                        android:textOff="Japanese"
+                        android:textOn="Japanese"/>
 
                     <ToggleButton
                         android:text="ToggleButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/FastFood"
-                        android:textOff="Fast Food" />
+                        android:textOff="Fast Food"
+                        android:textOn="Fast Food"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -182,7 +196,7 @@
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toggleButton4"
+                    android:id="@+id/priceToggle1"
                     android:layout_weight="1"
                     android:textOff="$"
                     android:textOn="$"
@@ -192,7 +206,7 @@
                     android:text="$$"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toggleButton3"
+                    android:id="@+id/priceToggle2"
                     android:layout_weight="1"
                     android:textOff="$$"
                     android:textOn="$$" />
@@ -201,7 +215,7 @@
                     android:text="$$$"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toggleButton2"
+                    android:id="@+id/priceToggle3"
                     android:layout_weight="1"
                     android:textOff="$$$"
                     android:textOn="$$$" />
@@ -210,7 +224,7 @@
                     android:text="$$$$"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/priceToggle4"
                     android:layout_weight="1"
                     android:textOff="$$$$"
                     android:textOn="$$$$" />

@@ -13,15 +13,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.Manifest.permission.*;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.net.URL;
 import java.security.Permission;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -111,8 +115,50 @@ public class SetupPage extends AppCompatActivity implements
         OkHttpClient client = new OkHttpClient();
 
 
-        String terms = "";
-        // TODO: terms
+        String terms = "term=";
+
+        if(((ToggleButton) findViewById(R.id.BreakFastButton)).isChecked()) {
+            terms += "+breakfast";
+        }
+        if(((ToggleButton) findViewById(R.id.MiddleEastButton)).isChecked()) {
+            terms += "+mideastern";
+        }
+        if(((ToggleButton) findViewById(R.id.PizzaButton)).isChecked()) {
+            terms += "+pizza";
+        }
+        if(((ToggleButton) findViewById(R.id.VietButton)).isChecked()) {
+            terms += "+vietnamese";
+        }
+        if(((ToggleButton) findViewById(R.id.ItalianButton)).isChecked()) {
+            terms += "+italian";
+        }
+        if(((ToggleButton) findViewById(R.id.ChineseButton)).isChecked()) {
+            terms += "+chinese";
+        }
+        if(((ToggleButton) findViewById(R.id.CafeTeaButton)).isChecked()) {
+            terms += "+cafe+tea";
+        }
+        if(((ToggleButton) findViewById(R.id.ThaiButton)).isChecked()) {
+            terms += "+thai";
+        }
+        if(((ToggleButton) findViewById(R.id.MediterraneanButton)).isChecked()) {
+            terms += "+mediterranean";
+        }
+        if(((ToggleButton) findViewById(R.id.BurgerButton)).isChecked()) {
+            terms += "+burger+sandwich";
+        }
+        if(((ToggleButton) findViewById(R.id.IndianButton)).isChecked()) {
+            terms += "+indian";
+        }
+        if(((ToggleButton) findViewById(R.id.ChineseButton)).isChecked()) {
+            terms += "+chinese";
+        }
+        if(((ToggleButton) findViewById(R.id.JapaneseButton)).isChecked()) {
+            terms += "+japanese";
+        }
+        if(((ToggleButton) findViewById(R.id.FastFood)).isChecked()) {
+            terms += "+fastfood";
+        }
 
         String location = "";
         EditText locationText = (EditText)findViewById(R.id.editTextLocation);
@@ -122,12 +168,49 @@ public class SetupPage extends AppCompatActivity implements
         if(mLastLocation != null) {
             location = "&latitude="+String.valueOf(mLastLocation.getLatitude()) + "&longitude="+String.valueOf(mLastLocation.getLongitude());
         }
+
+        String price = "&price=";
+        boolean anyPrice = true;
+        if(((ToggleButton)findViewById(R.id.priceToggle1)).isChecked()) {
+            price += "1";
+            anyPrice = false;
+        }
+        if(((ToggleButton)findViewById(R.id.priceToggle2)).isChecked()) {
+            if(!anyPrice){
+                price += ",";
+            }
+            price += "2";
+            anyPrice = false;
+        }
+        if(((ToggleButton)findViewById(R.id.priceToggle3)).isChecked()) {
+            if(!anyPrice){
+                price += ",";
+            }
+            price += "3";
+            anyPrice = false;
+        }
+        if(((ToggleButton)findViewById(R.id.priceToggle4)).isChecked()) {
+            if(!anyPrice){
+                price += ",";
+            }
+            price += "4";
+            anyPrice = false;
+        }
+
+        if(anyPrice) {
+            price += "1,2,3,4";
+        }
+
+        // TODO: radius
+        String radius = "";//"&radius=10000";
+
+        String finalUrl = "https://api.yelp.com/v3/businesses/search?"+terms+"&open_now=true"+location+radius+price;
+        Log.i("yelp", "GET: " + finalUrl);
         Request request = new Request.Builder()
-                .url("https://api.yelp.com/v3/businesses/search?"+terms+location)
+                .url(finalUrl)
                 .get()
                 .addHeader("authorization", "Bearer "+AccessToken)
                 .addHeader("cache-control", "no-cache")
-                .addHeader("postman-token", "a0f30f52-c3e6-7263-7f17-0145489a0ab2")
                 .build();
 
         try {
@@ -135,18 +218,24 @@ public class SetupPage extends AppCompatActivity implements
 
 
             String json = response.body().string();
-            //Log.i("Yelp", "Yelp Response: " + json);
+            Log.i("Yelp", "Yelp GET Response: " + json);
             try {
 
                 JSONObject obj = new JSONObject(json);
-                AccessToken = obj.getString("access_token");
-                Log.i("Yelp", "token: " + AccessToken);
+                JSONArray arr = obj.getJSONArray("businesses");
+                Random random = new Random();
+                JSONObject elem = arr.getJSONObject(random.nextInt(arr.length()));
+                String name = elem.getString("name");
+                JSONObject coordinates = elem.getJSONObject("coordinates");
+                String lon = coordinates.getString("longitude");
+                String lat = coordinates.getString("latitude");
+                Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
 
             } catch (Throwable t) {
                 Log.i("Yelp", "Could not parse malformed JSON: \"" + json + "\"");
             }
         } catch(Exception e) {
-            Log.i("Yelp", "Error " + e.toString());
+            Log.i("Yelp", "Error GET " + e.toString());
         }
     }
 
@@ -190,7 +279,10 @@ public class SetupPage extends AppCompatActivity implements
                     mGoogleApiClient);
             if (mLastLocation != null) {
                 EditText locationText = (EditText)findViewById(R.id.editTextLocation);
-                locationText.setText("latitude="+String.valueOf(mLastLocation.getLatitude()) + "&longitude="+String.valueOf(mLastLocation.getLongitude()));
+                locationText.setHint("Location Detected!");
+                locationText.setText("");
+                Button locationButton = (Button)findViewById(R.id.LocationButton);
+                locationButton.setText("Location Detected!");
             }
         } else {
             Log.i("Location", "no permission");
@@ -200,6 +292,7 @@ public class SetupPage extends AppCompatActivity implements
     private class AuthenticatorYelp extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             AuthenticateYelp();
+            RequestYelp();
             return Long.parseLong("0");
         }
 
@@ -209,5 +302,4 @@ public class SetupPage extends AppCompatActivity implements
         protected void onPostExecute(Long result) {
         }
     }
-
 }
