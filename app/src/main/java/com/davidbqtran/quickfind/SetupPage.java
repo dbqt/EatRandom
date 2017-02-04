@@ -15,6 +15,7 @@ import android.view.View;
 import android.Manifest.permission.*;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.net.URL;
 import java.security.Permission;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import okhttp3.MediaType;
@@ -51,6 +54,8 @@ public class SetupPage extends AppCompatActivity implements
 
     private Location mLastLocation;
 
+    private ArrayList<ToggleButton> allButtons;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +70,56 @@ public class SetupPage extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        allButtons = new ArrayList<ToggleButton>();
+        allButtons.add((ToggleButton) findViewById(R.id.BreakFastButton));
+        allButtons.add((ToggleButton) findViewById(R.id.BarPubButton));
+        allButtons.add((ToggleButton) findViewById(R.id.JapaneseButton));
+        allButtons.add((ToggleButton) findViewById(R.id.ChineseButton));
+        allButtons.add((ToggleButton) findViewById(R.id.VietButton));
+        allButtons.add((ToggleButton) findViewById(R.id.ThaiButton));
+        allButtons.add((ToggleButton) findViewById(R.id.BurgerButton));
+        allButtons.add((ToggleButton) findViewById(R.id.PizzaButton));
+        allButtons.add((ToggleButton) findViewById(R.id.ItalianButton));
+        allButtons.add((ToggleButton) findViewById(R.id.CafeTeaButton));
+        allButtons.add((ToggleButton) findViewById(R.id.MiddleEastButton));
+        allButtons.add((ToggleButton) findViewById(R.id.MediterraneanButton));
+        allButtons.add((ToggleButton) findViewById(R.id.FastFood));
+        allButtons.add((ToggleButton) findViewById(R.id.IndianButton));
     }
 
     public void FindClick(View v){
+
+        if(mLastLocation == null && ((EditText) findViewById(R.id.editTextLocation)).getText().toString().isEmpty()) {
+            Toast.makeText(this, "Location is not set!",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
         AuthenticatorYelp ay = new AuthenticatorYelp();
         ay.execute();
     }
 
     public void GetLocationClick(View v) {
         GetLocation();
+    }
+
+    public void ToggleAll(View v) {
+        boolean allOn = true;
+        for(ToggleButton tg : allButtons) {
+            allOn = allOn && tg.isChecked();
+        }
+
+        if(allOn) {
+            for(ToggleButton tg : allButtons) {
+                tg.setChecked(false);
+            }
+        } else {
+            for(ToggleButton tg : allButtons) {
+                tg.setChecked(true);
+            }
+        }
     }
 
     private void AuthenticateYelp(){
