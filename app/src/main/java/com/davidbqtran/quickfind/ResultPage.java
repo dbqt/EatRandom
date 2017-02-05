@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,7 +36,7 @@ public class ResultPage extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
-    String lat = "", lon = "", name = "", olocation = "", phone = "", jsonAddress = "";
+    String lat = "", lon = "", name = "", olocation = "", phone = "", jsonAddress = "", img = "";
 
     private final String googleMapKey = "AIzaSyBFhlkw7idNfIZ2Y22XWoKH4GY8yiE4o8o";
 
@@ -52,6 +55,7 @@ public class ResultPage extends AppCompatActivity {
             name = b.getString("name");
             phone = b.getString("phone");
             jsonAddress = b.getString("jsonAddress");
+            img = b.getString("img");
             ((TextView) findViewById(R.id.NAme)).setText("Go here: "+name);
             TextView tv = ((TextView) findViewById(R.id.addressText));
             String address = "";
@@ -66,6 +70,8 @@ public class ResultPage extends AppCompatActivity {
                 address += "\n";
                 address += phone;
                 tv.setText(address);
+
+                Picasso.with(this).load(img).into((ImageView)findViewById(R.id.imageResto));
             } catch (Exception e) {
                 Log.i("google", "address broken");
             }

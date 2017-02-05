@@ -18,13 +18,18 @@
             android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+
             android:orientation="vertical">
 
             <TextView
-                android:text="Type of food:"
+                android:text="Type of food (+)"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
+                android:id="@+id/foodText"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                android:onClick="ToggleFoodView"/>
 
             <Button
                 android:text="Toggle All"
@@ -34,16 +39,19 @@
                 android:onClick="ToggleAll" />
 
             <LinearLayout
+                android:id="@+id/linearBro"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:baselineAligned="false">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:id="@+id/list1">
+
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -104,7 +112,8 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:id="@+id/list2">
 
                     <ToggleButton
                         android:text="ToggleButton"

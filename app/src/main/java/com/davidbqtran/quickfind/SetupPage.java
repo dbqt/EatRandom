@@ -16,6 +16,8 @@ import android.view.View;
 import android.Manifest.permission.*;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -59,7 +61,7 @@ public class SetupPage extends AppCompatActivity implements
 
     public static Activity myActivity;
 
-    private String lon, lat, name, olocation, phone, jsonAddress;
+    private String lon, lat, name, olocation, phone, jsonAddress, img;
 
 
     @Override
@@ -91,8 +93,9 @@ public class SetupPage extends AppCompatActivity implements
         allButtons.add((ToggleButton) findViewById(R.id.MediterraneanButton));
         allButtons.add((ToggleButton) findViewById(R.id.FastFood));
         allButtons.add((ToggleButton) findViewById(R.id.IndianButton));
-
+        ((ScrollView)findViewById(R.id.activity_setup_page)).smoothScrollTo(0,0);
         findViewById(R.id.parentLayout).requestFocus();
+        ToggleView();
     }
 
     public void FindClick(View v){
@@ -108,6 +111,37 @@ public class SetupPage extends AppCompatActivity implements
         ay.execute();
     }
 
+    private boolean openedView = true;
+    public void ToggleFoodView(View v){
+        ToggleView();
+    }
+
+    private void ToggleView(){
+        openedView = !openedView;
+        if(openedView){
+            findViewById(R.id.button).setVisibility(View.VISIBLE);
+            findViewById(R.id.list1).setPivotY(0);
+            findViewById(R.id.list2).setPivotY(0);
+            findViewById(R.id.list1).animate().scaleY(1).setDuration(400); //.setVisibility(View.VISIBLE);
+            findViewById(R.id.list2).animate().scaleY(1).setDuration(400);
+            findViewById(R.id.list1).setVisibility(View.VISIBLE);
+            findViewById(R.id.list2).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.foodText)).setText("Filter type of food (-)");
+        } else {
+            findViewById(R.id.button).setVisibility(View.GONE);
+            findViewById(R.id.list1).setPivotY(0);
+            findViewById(R.id.list2).setPivotY(0);
+            findViewById(R.id.list1).animate().scaleY(0).setDuration(400);
+            findViewById(R.id.list2).animate().scaleY(0).setDuration(400);
+            findViewById(R.id.list1).setVisibility(View.GONE);
+            findViewById(R.id.list2).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.foodText)).setText("Filter type of food (+)");
+        }
+        //findViewById(R.id.linearBro).requestLayout();
+        findViewById(R.id.parentLayout).requestLayout();
+    }
+
+
     public void ShowResult() {
         Intent i = new Intent(this, ResultPage.class);
         i.putExtra("longitude", lon );
@@ -116,6 +150,7 @@ public class SetupPage extends AppCompatActivity implements
         i.putExtra("olocation", olocation);
         i.putExtra("phone", phone);
         i.putExtra("jsonAddress", jsonAddress);
+        i.putExtra("img", img);
         startActivity(i);
     }
 
@@ -179,49 +214,74 @@ public class SetupPage extends AppCompatActivity implements
         OkHttpClient client = new OkHttpClient();
 
 
-        String terms = "term=";
+        String terms = "categories=";
+
+        boolean first = true;
 
         if(((ToggleButton) findViewById(R.id.BreakFastButton)).isChecked()) {
-            terms += "+breakfast";
+            if(!first) terms += ",";
+            terms += "breakfast_brunch";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.MiddleEastButton)).isChecked()) {
-            terms += "+mideastern";
+            if(!first) terms += ",";
+            terms += "mideastern";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.PizzaButton)).isChecked()) {
-            terms += "+pizza";
+            if(!first) terms += ",";
+            terms += "pizza";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.VietButton)).isChecked()) {
-            terms += "+vietnamese";
+            if(!first) terms += ",";
+            terms += "vietnamese";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.ItalianButton)).isChecked()) {
-            terms += "+italian";
+            if(!first) terms += ",";
+            terms += "italian";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.ChineseButton)).isChecked()) {
-            terms += "+chinese";
+            if(!first) terms += ",";
+            terms += "chinese";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.CafeTeaButton)).isChecked()) {
-            terms += "+cafe+tea";
+            if(!first) terms += ",";
+            terms += "cafes,coffee";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.ThaiButton)).isChecked()) {
-            terms += "+thai";
+            if(!first) terms += ",";
+            terms += "thai";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.MediterraneanButton)).isChecked()) {
-            terms += "+mediterranean";
+            if(!first) terms += ",";
+            terms += "mediterranean";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.BurgerButton)).isChecked()) {
-            terms += "+burger+sandwich";
+            if(!first) terms += ",";
+            terms += "burgers,sandwiches";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.IndianButton)).isChecked()) {
-            terms += "+indian";
-        }
-        if(((ToggleButton) findViewById(R.id.ChineseButton)).isChecked()) {
-            terms += "+chinese";
+            if(!first) terms += ",";
+            terms += "indpak";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.JapaneseButton)).isChecked()) {
-            terms += "+japanese";
+            if(!first) terms += ",";
+            terms += "japanese";
+            first = false;
         }
         if(((ToggleButton) findViewById(R.id.FastFood)).isChecked()) {
-            terms += "+fastfood";
+            if(!first) terms += ",";
+            terms += "food_court";
+            first = false;
         }
 
         String location = "";
@@ -268,7 +328,7 @@ public class SetupPage extends AppCompatActivity implements
         }
 
         // TODO: radius
-        String radius = "&radius=3000";
+        String radius = "&radius=5000";
 
         String finalUrl = "https://api.yelp.com/v3/businesses/search?"+terms+"&open_now=true"+location+radius+price;
         Log.i("yelp", "GET: " + finalUrl);
@@ -302,6 +362,7 @@ public class SetupPage extends AppCompatActivity implements
                 JSONObject coordinates = elem.getJSONObject("coordinates");
                 lon = coordinates.getString("longitude");
                 lat = coordinates.getString("latitude");
+                img = elem.getString("image_url");
                 Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
 
             } catch (Throwable t) {
