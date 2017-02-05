@@ -17,6 +17,7 @@ import android.Manifest.permission.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -96,6 +97,29 @@ public class SetupPage extends AppCompatActivity implements
         ((ScrollView)findViewById(R.id.activity_setup_page)).smoothScrollTo(0,0);
         findViewById(R.id.parentLayout).requestFocus();
         ToggleView();
+
+        SeekBar sk=(SeekBar) findViewById(R.id.seekBar);
+        ((TextView)findViewById(R.id.distanceText)).setText("Max distance: "+(sk.getProgress()+1)+"km");
+        sk.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // TODO Auto-generated method stub
+                ((TextView)findViewById(R.id.distanceText)).setText("Max distance: "+(progress+1)+"km");
+
+
+            }
+        });
     }
 
     public void FindClick(View v){
@@ -328,7 +352,8 @@ public class SetupPage extends AppCompatActivity implements
         }
 
         // TODO: radius
-        String radius = "&radius=5000";
+        int radiusValue = (((SeekBar)findViewById(R.id.seekBar)).getProgress()+1) * 1000;
+        String radius = "&radius="+(radiusValue);
 
         String finalUrl = "https://api.yelp.com/v3/businesses/search?"+terms+"&open_now=true"+location+radius+price;
         Log.i("yelp", "GET: " + finalUrl);
@@ -441,7 +466,7 @@ public class SetupPage extends AppCompatActivity implements
 
         protected void onPostExecute(Long result) {
             if(result == -1) {
-                Toast.makeText(myActivity, "Unable to find food, please check the location!",
+                Toast.makeText(myActivity, "Unable to find food, please check the settings again",
                         Toast.LENGTH_LONG).show();
             }
             else {

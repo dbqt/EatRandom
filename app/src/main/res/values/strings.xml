@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">QuickFind</string>
+    <string name="app_name">Just Eat</string>
+
+    <string name="title_activity_fullscreen"></string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

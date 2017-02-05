@@ -22,32 +22,35 @@
 
             <Button
                 android:text="Back"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Back"
                 android:layout_weight="1"
-                android:onClick="Back" />
+                android:onClick="Back"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
             <Button
                 android:text="View on Maps"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/View"
                 android:layout_weight="1"
-                android:onClick="ViewOnExternal" />
+                android:onClick="ViewOnExternal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
         </LinearLayout>
 
         <TextView
-            android:text="Go here: "
+            android:text="Try this place: "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/NAme"
             android:textSize="24sp"
+            android:layout_marginTop="12dp"
             android:textStyle="normal|bold" />
 
         <TextView
-            android:text="dsa"
+            android:text=""
             android:autoLink="phone"
             android:linksClickable="true"
             android:layout_width="match_parent"
@@ -57,7 +60,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageResto"/>
+            android:layout_marginTop="12dp"
+            android:id="@+id/imageResto"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true" />
 
     </LinearLayout>
 

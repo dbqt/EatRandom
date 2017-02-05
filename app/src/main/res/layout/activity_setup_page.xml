@@ -11,6 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
 
+
     tools:context="com.davidbqtran.quickfind.SetupPage">
 
         <LinearLayout
@@ -27,16 +28,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/foodText"
+                android:onClick="ToggleFoodView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                 android:textStyle="normal|bold"
-                android:textSize="20dp"
-                android:onClick="ToggleFoodView"/>
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="12dp"
+                android:onClick="ToggleFoodView"
+                android:background="@color/black_overlay"/>
 
             <Button
                 android:text="Toggle All"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
-                android:onClick="ToggleAll" />
+                android:onClick="ToggleAll"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
             <LinearLayout
                 android:id="@+id/linearBro"
@@ -59,7 +69,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/BreakFastButton"
                         android:textOff="Breakfast"
-                        android:textOn="Breakfast"/>
+                        android:textOn="Breakfast"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -67,7 +78,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/MiddleEastButton"
                         android:textOff="Middle East"
-                        android:textOn="Middle East"/>
+                        android:textOn="Middle East"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -75,21 +87,24 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/PizzaButton"
                         android:textOff="Pizza"
-                        android:textOn="Pizza"/>
+                        android:textOn="Pizza"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/VietButton"
                         android:textOff="Viet"
-                        android:textOn="Viet"/>
+                        android:textOn="Viet"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ItalianButton"
                         android:textOff="Italian"
-                        android:textOn="Italian"/>
+                        android:textOn="Italian"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -97,7 +112,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/ChineseButton"
                         android:textOff="Chinese"
-                        android:textOn="Chinese"/>
+                        android:textOn="Chinese"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -105,7 +121,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/CafeTeaButton"
                         android:textOff="Cafe &amp; Tea"
-                        android:textOn="Cafe &amp; Tea"/>
+                        android:textOn="Cafe &amp; Tea"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,7 +138,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/ThaiButton"
                         android:textOff="Thai"
-                        android:textOn="Thai"/>
+                        android:textOn="Thai"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -129,7 +147,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/MediterraneanButton"
                         android:textOff="Mediterranean"
-                        android:textOn="Mediterranean"/>
+                        android:textOn="Mediterranean"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -137,7 +156,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/BurgerButton"
                         android:textOff="Burger &amp; Sandwich"
-                        android:textOn="Burger &amp; Sandwich"/>
+                        android:textOn="Burger &amp; Sandwich"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -145,7 +165,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/IndianButton"
                         android:textOff="Indian"
-                        android:textOn="Indian"/>
+                        android:textOn="Indian"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -153,7 +174,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/BarPubButton"
                         android:textOff="Bar &amp; Pub"
-                        android:textOn="Bar &amp; Pub"/>
+                        android:textOn="Bar &amp; Pub"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -161,7 +183,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/JapaneseButton"
                         android:textOff="Japanese"
-                        android:textOn="Japanese"/>
+                        android:textOn="Japanese"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
                     <ToggleButton
                         android:text="ToggleButton"
@@ -169,10 +192,15 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/FastFood"
                         android:textOff="Fast Food"
-                        android:textOn="Fast Food"/>
+                        android:textOn="Fast Food"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
                 </LinearLayout>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="12dp"
+                android:background="@color/black_overlay"/>
             <TextView
                 android:text="Your location"
                 android:layout_width="match_parent"
@@ -184,7 +212,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/LocationButton"
-                android:onClick="GetLocationClick" />
+                android:onClick="GetLocationClick"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -192,8 +221,21 @@
                 android:inputType="textPostalAddress"
                 android:ems="10"
                 android:id="@+id/editTextLocation"
-                android:hint="or write it yourself ie: H4G 3A9"
+                android:hint="or enter your location, ie: H4G 3A9"
                 android:maxLines="1" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/distanceText" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar"
+                android:progress="5"
+                android:max="19"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -242,17 +284,20 @@
                     android:textOff="$$$$"
                     android:textOn="$$$$" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="12dp"
+                android:background="@color/black_overlay"/>
             <Button
-                android:text="Find me something >"
+                android:text="Find me something!"
                 android:layout_width="match_parent"
                 android:id="@+id/SendButton"
                 android:elevation="0dp"
                 style="@style/Widget.AppCompat.Button"
-                android:textStyle="normal|bold"
                 android:onClick="FindClick"
-                android:textSize="24sp"
-                android:layout_height="80dp" />
+                android:layout_height="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         </LinearLayout>
 
