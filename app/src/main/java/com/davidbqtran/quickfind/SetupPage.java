@@ -304,7 +304,7 @@ public class SetupPage extends AppCompatActivity implements
         }
         if(((ToggleButton) findViewById(R.id.FastFood)).isChecked()) {
             if(!first) terms += ",";
-            terms += "food_court";
+            terms += "food_court,hotdogs";
             first = false;
         }
 
@@ -449,7 +449,7 @@ public class SetupPage extends AppCompatActivity implements
                 locationButton.setText("Location Detected!");
             }
         } else {
-            ((Button)findViewById(R.id.LocationButton)).setEnabled(false);
+            //((Button)findViewById(R.id.LocationButton)).setEnabled(false);
             Log.i("Location", "no permission");
         }
     }
