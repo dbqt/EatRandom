@@ -1,6 +1,7 @@
 package com.davidbqtran.quickfind;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -58,6 +59,8 @@ public class SetupPage extends AppCompatActivity implements
 
     public static Activity myActivity;
 
+    private String lon, lat, name, olocation, phone, jsonAddress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,8 @@ public class SetupPage extends AppCompatActivity implements
         allButtons.add((ToggleButton) findViewById(R.id.MediterraneanButton));
         allButtons.add((ToggleButton) findViewById(R.id.FastFood));
         allButtons.add((ToggleButton) findViewById(R.id.IndianButton));
+
+        findViewById(R.id.parentLayout).requestFocus();
     }
 
     public void FindClick(View v){
@@ -101,6 +106,17 @@ public class SetupPage extends AppCompatActivity implements
 
         AuthenticatorYelp ay = new AuthenticatorYelp();
         ay.execute();
+    }
+
+    public void ShowResult() {
+        Intent i = new Intent(this, ResultPage.class);
+        i.putExtra("longitude", lon );
+        i.putExtra("latitude", lat );
+        i.putExtra("name", name);
+        i.putExtra("olocation", olocation);
+        i.putExtra("phone", phone);
+        i.putExtra("jsonAddress", jsonAddress);
+        startActivity(i);
     }
 
     public void GetLocationClick(View v) {
@@ -212,9 +228,11 @@ public class SetupPage extends AppCompatActivity implements
         EditText locationText = (EditText)findViewById(R.id.editTextLocation);
         if(!locationText.getText().toString().isEmpty()) {
             location = "&location="+locationText.getText().toString().replace(" ", "+");
+            olocation = locationText.getText().toString().replace(" ", "+");
         }
         if(mLastLocation != null) {
             location = "&latitude="+String.valueOf(mLastLocation.getLatitude()) + "&longitude="+String.valueOf(mLastLocation.getLongitude());
+            olocation = String.valueOf(mLastLocation.getLatitude()) + ","+String.valueOf(mLastLocation.getLongitude());
         }
 
         String price = "&price=";
@@ -277,10 +295,13 @@ public class SetupPage extends AppCompatActivity implements
                 JSONArray arr = obj.getJSONArray("businesses");
                 Random random = new Random();
                 JSONObject elem = arr.getJSONObject(random.nextInt(arr.length()));
-                String name = elem.getString("name");
+                name = elem.getString("name");
+                phone = elem.getString("display_phone");
+                JSONObject jsonLocation = elem.getJSONObject("location");
+                jsonAddress = jsonLocation.getJSONArray("display_address").toString();
                 JSONObject coordinates = elem.getJSONObject("coordinates");
-                String lon = coordinates.getString("longitude");
-                String lat = coordinates.getString("latitude");
+                lon = coordinates.getString("longitude");
+                lat = coordinates.getString("latitude");
                 Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
 
             } catch (Throwable t) {
@@ -342,6 +363,7 @@ public class SetupPage extends AppCompatActivity implements
                 locationButton.setText("Location Detected!");
             }
         } else {
+            ((Button)findViewById(R.id.LocationButton)).setEnabled(false);
             Log.i("Location", "no permission");
         }
     }
@@ -360,6 +382,9 @@ public class SetupPage extends AppCompatActivity implements
             if(result == -1) {
                 Toast.makeText(myActivity, "Unable to find food, please check the location!",
                         Toast.LENGTH_LONG).show();
+            }
+            else {
+                ((SetupPage)myActivity).ShowResult();
             }
         }
     }

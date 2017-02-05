@@ -10,4 +10,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.davidbqtran.quickfind.ResultPage">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Back"
+                android:layout_weight="1"
+                android:onClick="Back" />
+
+            <Button
+                android:text="View on Maps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/View"
+                android:layout_weight="1"
+                android:onClick="ViewOnExternal" />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Go here: "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NAme"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:text="dsa"
+            android:autoLink="phone"
+            android:linksClickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressText"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
 </RelativeLayout>
