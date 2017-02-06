@@ -1,6 +1,7 @@
 
 #Just Eat
 Don't know what to eat? Let us find you something random with your preferences.
+[![IMAGE ALT TEXT](http://i.imgur.com/JAuClIm.png)](https://youtu.be/ZnAacxlgTiI)
 
 ## Inspiration
 Do you find yourself, with friends or family, wondering where to go eat all the time? Sure, we can pull out Yelp or Google Maps, but we'd have too many choices and we'd still waste time choosing.
@@ -24,4 +25,11 @@ I learned how to use external APIs in an Android application.
 I will be adding more customization and maybe some machine learning to get to know you, the user.
 
 Developer: David Tran
+
 For Hackatown 2017
+
+![Imgur](http://i.imgur.com/9c44WZE.jpg)
+![Imgur](http://i.imgur.com/hSHORgi.jpg)
+![Imgur](http://i.imgur.com/1ZgQG1t.jpg)
+![Imgur](http://i.imgur.com/yRpno2i.jpg)
+![Imgur](http://i.imgur.com/F68ybXb.jpg)
