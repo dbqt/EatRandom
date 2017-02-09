@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,6 +107,9 @@ public class ResultPage extends AppCompatActivity {
             checkedPlace.add(index);
 
             JSONObject elem = arr.getJSONObject(index);
+
+            Log.i("ONE", " aie : " + elem.toString());
+
             String name = elem.getString("name");
             String phone = elem.getString("display_phone");
             JSONObject jsonLocation = elem.getJSONObject("location");
@@ -114,6 +118,8 @@ public class ResultPage extends AppCompatActivity {
             String lon = coordinates.getString("longitude");
             String lat = coordinates.getString("latitude");
             String img = elem.getString("image_url");
+            double rating = elem.getDouble("rating");
+            ((RatingBar)findViewById(R.id.ratingBar)).setRating((float) rating);
             Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
 
             ((TextView) findViewById(R.id.NAme)).setText("Go here: "+name);
