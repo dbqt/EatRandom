@@ -1,4 +1,4 @@
-package com.davidbqtran.quickfind;
+package com.davidbqtran.justeatrandom;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +8,10 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.Manifest.permission.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -29,9 +27,7 @@ import com.google.android.gms.location.LocationServices;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.net.URL;
-import java.security.Permission;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import okhttp3.MediaType;
@@ -42,7 +38,6 @@ import okhttp3.Response;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 
 public class SetupPage extends AppCompatActivity implements
@@ -62,7 +57,7 @@ public class SetupPage extends AppCompatActivity implements
 
     public static Activity myActivity;
 
-    private String lon, lat, name, olocation, phone, jsonAddress, img;
+    private String lon, lat, name, olocation, phone, jsonAddress, img, json;
 
 
     @Override
@@ -120,6 +115,8 @@ public class SetupPage extends AppCompatActivity implements
 
             }
         });
+
+
     }
 
     public void FindClick(View v){
@@ -168,13 +165,7 @@ public class SetupPage extends AppCompatActivity implements
 
     public void ShowResult() {
         Intent i = new Intent(this, ResultPage.class);
-        i.putExtra("longitude", lon );
-        i.putExtra("latitude", lat );
-        i.putExtra("name", name);
-        i.putExtra("olocation", olocation);
-        i.putExtra("phone", phone);
-        i.putExtra("jsonAddress", jsonAddress);
-        i.putExtra("img", img);
+        i.putExtra("json", this.json);
         startActivity(i);
     }
 
@@ -369,6 +360,7 @@ public class SetupPage extends AppCompatActivity implements
 
 
             String json = response.body().string();
+            this.json = json;
             Log.i("Yelp", "Yelp GET Response: " + json);
             try {
 
@@ -405,7 +397,7 @@ public class SetupPage extends AppCompatActivity implements
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
+        GetLocation();
     }
 
     @Override
@@ -420,6 +412,7 @@ public class SetupPage extends AppCompatActivity implements
 
     protected void onStart() {
         mGoogleApiClient.connect();
+
         super.onStart();
     }
 

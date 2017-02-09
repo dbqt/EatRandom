@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.davidbqtran.quickfind">
+    package="com.davidbqtran.justeatrandom">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -9,16 +9,19 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_short"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SetupPage">
+        <activity android:name=".SetupPage"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResultPage" />
-        <activity android:name=".Splash">
+        <activity android:name=".ResultPage"
+            android:label="@string/app_name"/>
+        <activity android:name=".Splash"
+            android:theme="@style/NoActionBarCustom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

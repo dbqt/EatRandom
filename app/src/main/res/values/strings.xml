@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Just Eat</string>
+    <string name="app_name">Just Eat Random</string>
+    <string name="app_name_short">Just Eat</string>
 
     <string name="title_activity_fullscreen"></string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5954594840677307/2353592074</string>
+
+
 </resources>

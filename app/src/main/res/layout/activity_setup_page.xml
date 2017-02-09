@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
 
 
-    tools:context="com.davidbqtran.quickfind.SetupPage">
+    tools:context=".SetupPage">
 
         <LinearLayout
             android:id="@+id/parentLayout"

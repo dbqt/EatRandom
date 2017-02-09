@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "833411892370",
+    "firebase_url": "https://justeatrandom.firebaseio.com",
+    "project_id": "justeatrandom",
+    "storage_bucket": "justeatrandom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833411892370:android:c45d25af5ab263ac",
+        "android_client_info": {
+          "package_name": "com.davidbqtran.justeatrandom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833411892370-ujv6u3sjo1tair9s1ad06633uoc0vml2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyr48ryZr4tFihj2aqiL97azJOfePX48I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
