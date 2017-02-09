@@ -118,6 +118,9 @@ public class ResultPage extends AppCompatActivity {
             String lon = coordinates.getString("longitude");
             String lat = coordinates.getString("latitude");
             String img = elem.getString("image_url");
+
+            ((ImageView)findViewById(R.id.imageResto)).setAlpha(img.isEmpty() ? 0f : 1f);
+
             double rating = elem.getDouble("rating");
             ((RatingBar)findViewById(R.id.ratingBar)).setRating((float) rating);
             Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
