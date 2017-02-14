@@ -128,6 +128,7 @@ public class SetupPage extends AppCompatActivity implements
             return;
         }
 
+        ((Button)findViewById(R.id.SendButton)).setEnabled(false);
         AuthenticatorYelp ay = new AuthenticatorYelp();
         ay.execute();
     }
@@ -429,9 +430,14 @@ public class SetupPage extends AppCompatActivity implements
                 ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
             }
         }
+
+        boolean perm = true;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            perm = this.checkSelfPermission(ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                    this.checkSelfPermission(ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        }
         // if ok perms
-        if(this.checkSelfPermission(ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                this.checkSelfPermission(ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED  ) {
+        if(perm) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
             if (mLastLocation != null) {
@@ -458,6 +464,7 @@ public class SetupPage extends AppCompatActivity implements
         }
 
         protected void onPostExecute(Long result) {
+            ((Button)findViewById(R.id.SendButton)).setEnabled(true);
             if(result == -1) {
                 Toast.makeText(myActivity, "Unable to find food, please check the settings again",
                         Toast.LENGTH_LONG).show();
