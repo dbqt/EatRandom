@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.davidbqtran.justeatrandom.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.vision.text.Text;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -52,6 +54,8 @@ public class ResultPage extends AppCompatActivity {
 
     private Intent mapIntent;
 
+    private String yelpLink = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +88,13 @@ public class ResultPage extends AppCompatActivity {
         UpdateFields();
     }
 
+    public void BrowserYelpUrl(View v){
+        if (!yelpLink.isEmpty()) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(yelpLink));
+            startActivity(browserIntent);
+        }
+    }
+
     private void UpdateFields() {
         try {
 
@@ -110,22 +121,70 @@ public class ResultPage extends AppCompatActivity {
 
             Log.i("ONE", " aie : " + elem.toString());
 
+            /*{"name":"Über Cafbar","location":{"state":"QC","city":"Montreal","display_address":["1101 Rue Fleury E","Montreal, QC H2C 2M9","Canada"],"address1":"1101 Rue Fleury E","zip_code":"H2C 2M9","address2":"","address3":"","country":"CA"},"rating":4.5,"phone":"+15143839009","coordinates":{"longitude":-73.659398,"latitude":45.557981},"url":"https:\/\/www.yelp.com\/biz\/%C3%BCber-cafbar-montr%C3%A9al-2?adjust_creative=k6QdreYeqRXHOTHKFkMacQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=k6QdreYeqRXHOTHKFkMacQ","distance":1781.355432438,"image_url":"https:\/\/s3-media4.fl.yelpcdn.com\/bphoto\/rao-3y-B1hajQ0-faV9X_g\/o.jpg","categories":[{"alias":"lounges","title":"Lounges"},{"alias":"coffee","title":"Coffee & Tea"},{"alias":"cocktailbars","title":"Cocktail Bars"}],"display_phone":"+1 514-383-9009","review_count":3,"id":"über-cafbar-montréal-2","price":"$$","is_closed":false}*/
+
             String name = elem.getString("name");
             String phone = elem.getString("display_phone");
             JSONObject jsonLocation = elem.getJSONObject("location");
-            String jsonAddress = jsonLocation.getJSONArray("display_address").toString();
+
             JSONObject coordinates = elem.getJSONObject("coordinates");
             String lon = coordinates.getString("longitude");
             String lat = coordinates.getString("latitude");
-            String img = elem.getString("image_url");
 
+            yelpLink = elem.getString("url");
+
+            // setup review count
+            int reviewCount = elem.getInt("review_count");
+            ((TextView)findViewById(R.id.reviewCount)).setText("Based on "+reviewCount+" reviews");
+
+            // setup review stars
+            int rating = ((Double)(elem.getDouble("rating") * 2)).intValue();
+            switch (rating) {
+                case 0:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_0, null));
+                    break;
+                case 1:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_0, null));
+                    break;
+                case 2:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_1, null));
+                    break;
+                case 3:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_1_half, null));
+                    break;
+                case 4:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_2, null));
+                    break;
+                case 5:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_2_half, null));
+                    break;
+                case 6:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_3, null));
+                    break;
+                case 7:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_3_half, null));
+                    break;
+                case 8:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_4, null));
+                    break;
+                case 9:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_4_half, null));
+                    break;
+                case 10:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_5, null));
+                    break;
+                default:
+                    ((ImageView)findViewById(R.id.yelpStars)).setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.stars_large_0, null));
+            }
+
+            // setup preview img
+            String img = elem.getString("image_url");
             ((ImageView)findViewById(R.id.imageResto)).setAlpha(img.isEmpty() ? 0f : 1f);
 
-            double rating = elem.getDouble("rating");
-            ((RatingBar)findViewById(R.id.ratingBar)).setRating((float) rating);
             Log.i("Yelp", "Place: "+name+" lon="+lon+" lat"+lat );
 
-            ((TextView) findViewById(R.id.NAme)).setText("Go here: "+name);
+            ((TextView) findViewById(R.id.NAme)).setText(""+name);
+            String jsonAddress = jsonLocation.getJSONArray("display_address").toString();
             TextView tv = ((TextView) findViewById(R.id.addressText));
             String address = "";
             try {

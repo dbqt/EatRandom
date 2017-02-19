@@ -17,7 +17,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -29,23 +30,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:text="Back"
+                <ImageButton
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Back"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButton3"
                     android:layout_weight="1"
                     android:onClick="Back"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                    ads:srcCompat="@drawable/back_icon"
+                    android:scaleType="fitCenter" />
 
                 <Button
                     android:text="View on Maps"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/View"
                     android:layout_weight="1"
                     android:onClick="ViewOnExternal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                    android:drawableRight="@drawable/map_icon"
+                    android:drawablePadding="2dp"
+                    android:gravity="center|center"/>
 
             </LinearLayout>
 
@@ -55,7 +59,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Next"
                 android:onClick="GetNextRandom"
-                android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                android:drawableLeft="@drawable/restart_icon"
+                android:drawablePadding="2dp"/>
 
             <TextView
                 android:text="Try this place: "
@@ -74,11 +80,37 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/addressText" />
 
-            <RatingBar
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    ads:srcCompat="@drawable/stars_large_0"
+                    android:id="@+id/yelpStars"
+                    android:layout_weight="1"
+                    android:scaleType="fitStart" />
+
+                <ImageButton
+                    android:layout_width="50dp"
+                    ads:srcCompat="@drawable/yelp_burst_positive_rgb"
+                    android:id="@+id/imageButton"
+                    android:elevation="0dp"
+                    android:scaleType="fitEnd"
+                    android:onClick="BrowserYelpUrl"
+                    android:layout_weight="1"
+                    style="@android:style/Widget.DeviceDefault.ImageButton"
+                    android:background="#0fffffff"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                android:numStars="5" />
+                android:id="@+id/reviewCount" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -92,6 +124,7 @@
 
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"

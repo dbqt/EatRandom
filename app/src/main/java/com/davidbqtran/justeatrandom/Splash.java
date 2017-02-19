@@ -26,8 +26,8 @@ public class Splash extends AppCompatActivity {
     private void anime(){
         findViewById(R.id.textView2).setAlpha(0);
         findViewById(R.id.button2).setAlpha(0);
-        findViewById(R.id.textView2).animate().alpha(1).setDuration(2000).setStartDelay(1000);
-        findViewById(R.id.button2).animate().alpha(1).setDuration(1500).setStartDelay(4000);
+        findViewById(R.id.textView2).animate().alpha(1).setDuration(1000);
+        findViewById(R.id.button2).animate().alpha(1).setDuration(1500).setStartDelay(1500);
     }
 
     public void LoadNext(View v){
