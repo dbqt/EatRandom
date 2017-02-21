@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,7 +111,7 @@ public class SetupPage extends AppCompatActivity implements
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // TODO Auto-generated method stub
-                ((TextView)findViewById(R.id.distanceText)).setText("Max distance: "+(progress+1)+"km");
+                ((TextView)findViewById(R.id.distanceText)).setText("Max travel distance: "+(progress+1)+"km");
 
 
             }
@@ -148,7 +149,8 @@ public class SetupPage extends AppCompatActivity implements
             findViewById(R.id.list2).animate().scaleY(1).setDuration(400);
             findViewById(R.id.list1).setVisibility(View.VISIBLE);
             findViewById(R.id.list2).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.foodText)).setText("Filter type of food (-)");
+            ((TextView) findViewById(R.id.typeToggle)).setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_keyboard_arrow_up_black, 0);
+            //((TextView) findViewById(R.id.typeToggle)).setCompoundDrawables(null, null, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_arrow_up_black , null), null);
         } else {
             findViewById(R.id.button).setVisibility(View.GONE);
             findViewById(R.id.list1).setPivotY(0);
@@ -157,7 +159,8 @@ public class SetupPage extends AppCompatActivity implements
             findViewById(R.id.list2).animate().scaleY(0).setDuration(400);
             findViewById(R.id.list1).setVisibility(View.GONE);
             findViewById(R.id.list2).setVisibility(View.GONE);
-            ((TextView) findViewById(R.id.foodText)).setText("Filter type of food (+)");
+            ((TextView) findViewById(R.id.typeToggle)).setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_keyboard_arrow_down_black, 0);
+            //((TextView) findViewById(R.id.typeToggle)).setCompoundDrawables(null, null, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_arrow_down_black , null), null);
         }
         //findViewById(R.id.linearBro).requestLayout();
         findViewById(R.id.parentLayout).requestLayout();
@@ -442,10 +445,10 @@ public class SetupPage extends AppCompatActivity implements
                     mGoogleApiClient);
             if (mLastLocation != null) {
                 EditText locationText = (EditText)findViewById(R.id.editTextLocation);
-                locationText.setHint("Location Detected!");
+                locationText.setHint("Your Location Detected!");
                 locationText.setText("");
                 Button locationButton = (Button)findViewById(R.id.LocationButton);
-                locationButton.setText("Location Detected!");
+                locationButton.setText("Your Location Detected!");
             }
         } else {
             //((Button)findViewById(R.id.LocationButton)).setEnabled(false);

@@ -32,7 +32,7 @@
 
                 <ImageButton
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="60dp"
                     android:id="@+id/imageButton3"
                     android:layout_weight="1"
                     android:onClick="Back"
@@ -42,26 +42,26 @@
                 <Button
                     android:text="View on Maps"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/View"
                     android:layout_weight="1"
                     android:onClick="ViewOnExternal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:drawableRight="@drawable/map_icon"
-                    android:drawablePadding="2dp"
-                    android:gravity="center|center"/>
+                    android:drawableEnd="@drawable/map_icon"
+                    android:drawablePadding="4dp"
+                    android:gravity="center|center"
+                    android:layout_height="60dp" />
 
             </LinearLayout>
 
             <Button
                 android:text="I don't like it, give me another!"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/Next"
                 android:onClick="GetNextRandom"
                 android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                 android:drawableLeft="@drawable/restart_icon"
-                android:drawablePadding="2dp"/>
+                android:drawablePadding="2dp"
+                android:layout_height="60dp" />
 
             <TextView
                 android:text="Try this place: "
@@ -87,11 +87,10 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
                     ads:srcCompat="@drawable/stars_large_0"
                     android:id="@+id/yelpStars"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart" />
+                    android:scaleType="fitStart"
+                    android:layout_height="wrap_content" />
 
                 <ImageButton
                     android:layout_width="50dp"
